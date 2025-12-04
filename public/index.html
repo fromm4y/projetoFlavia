@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Descubra o fascinante mundo dos animais marinhos! Informações, curiosidades e imagens para promover a conscientização sobre a vida marinha." />
+  <title>Animais Marinhos — 🐠 Cuidar do oceano é salvar milhões de vidas.</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+</head>
+<body>
+  <header class="container" role="banner" aria-label="Cabeçalho do site">
+    <div class="topbar">
+      <div class="brand" aria-hidden="false">
+        <div class="logo" aria-hidden="true">CO</div>
+        <div>
+          <div class="site-title">Conexão Oceano</div>
+          <div style="font-size:.85rem;color:var(--muted)">Equipe: Amanda Silva, Flávia Vitória.</div>
+        </div>
+      </div>
+
+      <nav role="navigation" aria-label="Navegação principal">
+        <ul>
+          <li><a href="#curiosidades">Curiosidades</a></li>
+          <li><a href="#fatos">Fatos</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="controls" role="region" aria-label="Controles">
+        <button id="themeToggle" class="icon-btn" aria-pressed="false" title="Alternar modo claro/escuro" aria-label="Alternar modo claro e escuro">🌓</button>
+        <button class="btn" id="btnAbrirChatbotHeader" aria-controls="chatbotPanel" aria-expanded="false">Abrir Chatbot</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="top" role="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-card" role="region" aria-label="Introdução">
+        <h1 id="hero-title">Animais Marinhos</h1>
+        <p class="sub">🐠 “Cuidar do oceano é salvar milhões de vidas.”</p>
+        <p class="lead">Descubra o fascinante mundo dos animais marinhos! Este site apresenta informações, curiosidades e imagens sobre as espécies que habitam os oceanos, promovendo a conscientização sobre a vida marinha e a preservação dos mares.</p>
+
+        <div style="display:flex;gap:.6rem;align-items:center" class="actions">
+          <!-- TODO: o aluno pode alterar os textos/ordens dos botões -->
+          <button id="abrirIA" class="btn" aria-label="Iniciar reconhecimento facial">Reconhecimento Facial</button>
+          <button id="btnAbrirChatbot" class="btn secondary" aria-label="Abrir chatbot">Abrir Chatbot</button>
+          <a href="#galeria" class="btn" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))">Ver Galeria</a>
+        </div>
+
+        <div style="margin-top:1rem;font-size:.9rem;color:var(--muted)">
+          <strong>Equipe:</strong> Conexão Oceano — Amanda Silva, Flávia Vitória.
+        </div>
+      </div>
+
+      <figure class="hero-figure" role="img" aria-label="Imagem principal do fundo do mar">
+        <!-- TODO: substituir src pela imagem escolhida pelo aluno -->
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Cena subaquática com vida marinha e recifes" />
+      </figure>
+    </section>
+
+    <!-- CURIOSIDADES -->
+    <section id="curiosidades" aria-labelledby="curio-title">
+      <h2 id="curio-title">Curiosidades</h2>
+      <p class="sub">Fatos rápidos e surpreendentes sobre a vida marinha.</p>
+
+      <div class="curiosidades" role="list">
+        <article class="curio" role="listitem">
+          <div class="ico" aria-hidden="true">🐴</div>
+          <p>O cavalo-marinho é o único animal em que o macho fica “grávido”.</p>
+        </article>
+
+        <article class="curio" role="listitem">
+          <div class="ico" aria-hidden="true">⭐</div>
+          <p>As estrelas-do-mar podem regenerar braços perdidos.</p>
+        </article>
+
+        <article class="curio" role="listitem">
+          <div class="ico" aria-hidden="true">🦈</div>
+          <p>O tubarão é mais antigo que os dinossauros.</p>
+        </article>
+
+        <article class="curio" role="listitem">
+          <div class="ico" aria-hidden="true">🐙</div>
+          <p>O polvo tem três corações e sangue azul.</p>
+        </article>
+
+        <article class="curio" role="listitem">
+          <div class="ico" aria-hidden="true">🐢</div>
+          <p>As tartarugas-marinhas podem viver mais de 80 anos.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FATOS / CIÊNCIA -->
+    <section id="fatos" aria-labelledby="fatos-title">
+      <h2 id="fatos-title">Fatos & Ciência</h2>
+      <p class="sub">Entenda aspectos científicos essenciais sobre os oceanos.</p>
+
+      <div class="cards">
+        <article class="card" aria-labelledby="f1">
+          <h3 id="f1">Biodiversidade dos Oceanos</h3>
+          <p>Mais de 70% das espécies da Terra vivem nos oceanos, muitas ainda desconhecidas pela ciência.</p>
+        </article>
+
+        <article class="card" aria-labelledby="f2">
+          <h3 id="f2">Bioluminescência</h3>
+          <p>Alguns animais produzem luz própria por bioluminescência, usada para caça, comunicação e defesa.</p>
+        </article>
+
+        <article class="card" aria-labelledby="f3">
+          <h3 id="f3">Importância do Plâncton</h3>
+          <p>O fitoplâncton é responsável por produzir cerca de 50% do oxigênio do planeta.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section id="galeria" aria-labelledby="galeria-title">
+      <h2 id="galeria-title">Galeria</h2>
+      <p class="sub">Imagens representativas da vida marinha. Clique para ampliar.</p>
+
+      <div class="gallery" role="list">
+        <!-- TODO: substitua as URLs por imagens escolhidas pelo grupo -->
+        <figure class="photo" role="listitem">
+          <img src="https://midias.correiobraziliense.com.br/_midias/jpg/2024/11/14/000_36mg2zc-41707848.jpg" alt="Coral saudável no oceano Pacífico">
+          <figcaption class="caption">Coral saudável no oceano Pacífico</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="https://thumbs.dreamstime.com/b/tartaruga-nadando-sobre-um-recife-de-coral-imagem-mostra-uma-marinha-graciosamente-vibrante-casca-das-tartarugas-exibe-belo-384041676.jpg" alt="Tartaruga marinha nadando sobre coral">
+          <figcaption class="caption">Tartaruga marinha nadando sobre coral</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="https://segredosdomundo.r7.com/wp-content/uploads/2020/06/golfinhos-como-vivem-do-que-se-alimentam-e-principais-habitos.jpg" alt="Golfinho em ambiente natural">
+          <figcaption class="caption">Golfinho em ambiente natural</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="https://img.freepik.com/fotos-gratis/ai-gerou-imagens-realistas-de-focas_23-2150682290.jpg?semt=ais_hybrid&w=740&q=80" alt="Foca marinha olhando para a câmera">
+          <figcaption class="caption">Foca marinha olhando para a câmera</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="https://png.pngtree.com/thumb_back/fw800/background/20241219/pngtree-colorful-fish-swimming-nder-coral-reef-image_16826794.jpg" alt="Peixes coloridos e recife de coral">
+          <figcaption class="caption">Peixes coloridos e recife de coral</figcaption>
+        </figure>
+
+        <figure class="photo" role="listitem">
+          <img src="https://vault.pulsarimagens.com.br/file/thumb/25AS372.jpg" alt="Tubarão nadando no mar aberto">
+          <figcaption class="caption">Tubarão nadando no mar aberto</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Perguntas Frequentes</h2>
+      <p class="sub">Dúvidas comuns respondidas de forma curta.</p>
+
+      <div class="faq" role="list">
+        <details>
+          <summary>Os corais são plantas ou animais?</summary>
+          <p>São animais, pertencem ao grupo dos cnidários.</p>
+        </details>
+
+        <details>
+          <summary>Como os golfinhos se comunicam?</summary>
+          <p>Usam sons, assobios e cliques para se comunicar.</p>
+        </details>
+
+        <details>
+          <summary>Os tubarões dormem?</summary>
+          <p>Sim, mas não dormem como humanos; muitos continuam se movendo para respirar.</p>
+        </details>
+
+        <details>
+          <summary>O polvo tem quantos corações?</summary>
+          <p>Três corações — dois bombeiam sangue para as brânquias e um para o corpo.</p>
+        </details>
+
+        <details>
+          <summary>As tartarugas-marinhas voltam ao mesmo local para pôr ovos?</summary>
+          <p>Sim, geralmente retornam à praia onde nasceram.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section aria-label="Chamada para ação final" style="margin-top:1.25rem">
+      <div class="cta">
+        <div>
+          <strong>Quer aprender mais?</strong>
+          <div style="color:var(--muted)">Explore nossos materiais e atividades educativas sobre a preservação marinha.</div>
+        </div>
+        <div style="display:flex;gap:.6rem;align-items:center">
+          <a href="#fatos" title="Aprenda mais">Aprenda mais</a>
+          <a href="#galeria" title="Baixar material">Baixar material</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FONTES / CRÉDITOS -->
+    <section aria-label="Créditos e fontes" style="margin-top:1rem">
+      <h2>Créditos & Fontes</h2>
+      <p class="sub">Referências e recursos usados no projeto.</p>
+      <ul>
+        <li><a href="https://oceana.org/marine-life" target="_blank" rel="noopener">Oceana — Marine Life</a></li>
+        <li><a href="https://www.citrusreef.com/blogs/news/most-endangered-sea-animals" target="_blank" rel="noopener">CitrusReef — Endangered Sea Animals</a></li>
+        <li><a href="https://www.scuba.com/blog/5-intelligent-marine-animals" target="_blank" rel="noopener">Scuba — Intelligent Marine Animals</a></li>
+        <li><a href="https://www.animalsinternational.org/issues-impacting-animals/marine-animals/" target="_blank" rel="noopener">Animals International — Marine Animals</a></li>
+        <li><a href="https://www.marinebiodiversity.ca/sea-animals-from-a-to-z/" target="_blank" rel="noopener">Marine Biodiversity — Sea Animals</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ASIDE: Chatbot painel -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Oceandro"
+      agent-id="7e9ea28d-fc2a-4f18-a435-1d31267d9a34"
+      language-code="pt-br">
+    </df-messenger>
+
+<!-- MODAL DE RECONHECIMENTO FACIAL -->
+<div id="cameraModal" class="modal-camera" aria-hidden="true">
+  <div class="modal-camera-content">
+    <button id="fecharModal" class="modal-camera-close" title="Fechar">❌</button>
+    <h2 class="modal-camera-title">Reconhecimento Facial</h2>
+    <div class="modal-video-wrap">
+      <video id="video" autoplay muted playsinline></video>
+    </div>
+    <div class="modal-camera-controls">
+      <button id="tirarFoto" class="modal-camera-btn" title="Tirar foto">📸 Tirar Foto</button>
+    </div>
+    <p id="modalStatus" class="modal-camera-status">Aguardando...</p>
+    <canvas id="fotoCanvas" style="display:none;"></canvas>
+  </div>
+</div>
+
+  <!-- RODAPÉ -->
+  <footer class="container" role="contentinfo">
+    <div class="credits">
+      <strong>Conexão Oceano</strong> — Projeto: Fundo do Mar. <span id="year"></span>
+      <div style="font-size:.85rem;color:var(--muted)">Integrantes: Amanda, Flávia Vitória, Otávio Farias</div>
+    </div>
+    <div>
+      <a class="back-to-top" href="#top" aria-label="Voltar ao topo">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>

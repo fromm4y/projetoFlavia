@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultado - Exploração do Oceano</title>
+  <style>
+    /* =========================
+       Variáveis de tema
+       ========================= */
+    :root{
+      --bg-gradient: linear-gradient(180deg,#e6f7fb 0%, #d7f3fa 60%);
+      --page-bg: #e6f7fb;
+      --text:#03303c;
+      --muted:#2f5862;
+      --card:#ffffff;
+      --accent:#007aa3;
+      --accent-2:#00b4e6;
+      --glass: rgba(255,255,255,0.6);
+      --radius:14px;
+      --soft-shadow: 0 6px 20px rgba(2,30,40,0.08);
+      --transition:300ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    [data-theme="dark"]{
+      --bg-gradient: linear-gradient(180deg,#02121a 0%, #042a32 60%);
+      --page-bg: #02121a;
+      --text:#d6f6fb;
+      --muted:#9fb7bd;
+      --card: rgba(6,24,30,0.85);
+      --accent:#44c2ff;
+      --accent-2:#7bd9ff;
+      --glass: rgba(255,255,255,0.03);
+      --soft-shadow: none;
+    }
+
+    /* Reset e layout base */
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      background:var(--bg-gradient);
+      margin:0;
+      color:var(--text);
+      font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system;
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:1.5rem;
+    }
+    img{max-width:100%;display:block;height:auto}
+    button{cursor:pointer}
+
+    /* Card de emoção */
+    .result-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:2rem;
+      box-shadow:var(--soft-shadow);
+      text-align:center;
+      max-width:420px;
+      width:100%;
+      transition:transform var(--transition);
+      backdrop-filter:blur(6px);
+    }
+    .result-card:hover{transform:translateY(-6px)}
+    .result-card img{
+      border-radius:12px;
+      box-shadow:var(--soft-shadow);
+      margin-bottom:1rem;
+      width:100%;
+      height:auto;
+    }
+
+    h1{
+      font-size:1.8rem;
+      margin-bottom:.5rem;
+    }
+    h2{
+      font-size:1.4rem;
+      margin-top:0;
+      margin-bottom:.4rem;
+      color:var(--accent);
+    }
+    p{
+      color:var(--muted);
+      font-weight:500;
+      margin-bottom:1rem;
+    }
+
+    .btn{
+      border:0;
+      background:var(--accent);
+      color:white;
+      padding:.75rem 1.25rem;
+      border-radius:10px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(0,0,0,0.08);
+      transition:transform var(--transition), box-shadow var(--transition);
+    }
+    .btn:hover{background:var(--accent-2);transform:translateY(-2px)}
+    .btn:active{transform:translateY(1px)}
+
+    /* Alternar tema */
+    .theme-toggle{
+      position:fixed;
+      top:1rem;
+      right:1rem;
+      background:var(--card);
+      border-radius:10px;
+      box-shadow:var(--soft-shadow);
+      padding:.5rem .75rem;
+      font-weight:600;
+      color:var(--accent);
+      cursor:pointer;
+      transition:var(--transition);
+    }
+    .theme-toggle:hover{background:var(--glass)}
+  </style>
+</head>
+<body>
+  <div class="theme-toggle" onclick="toggleTheme()">🌗 Mudar tema</div>
+
+  <div class="result-card">
+    <h1>🌊 Emoção detectada</h1>
+    <h2 id="emocaoTitle">Processando...</h2>
+    <p id="confTitle"></p>
+    <img id="imagemEmocao" alt="Imagem relacionada à emoção" />
+    <button class="btn" onclick="voltar()">Voltar</button>
+  </div>
+
+  <script>
+    const imagensPorEmocao = {
+      feliz: [
+        'static/mar_feliz/1.png',
+        'static/mar_feliz/2.png',
+        'static/mar_feliz/3.png',
+        'static/mar_feliz/4.png',
+        'static/mar_feliz/5.png',
+        'static/mar_feliz/6.png',
+        'static/mar_feliz/7.png',
+        'static/mar_feliz/8.png',
+        'static/mar_feliz/9.png',
+        'static/mar_feliz/10.png',
+        'static/mar_feliz/11.png',
+        'static/mar_feliz/12.png',
+        'static/mar_feliz/13.png',
+        'static/mar_feliz/14.png',
+        'static/mar_feliz/15.png',
+        'static/mar_feliz/16.png',
+        'static/mar_feliz/17.png',
+        'static/mar_feliz/18.png',
+        'static/mar_feliz/19.png',
+        'static/mar_feliz/20.png'
+   ],
+      triste: [
+        'static/mar_triste/1.png',
+        'static/mar_triste/2.png',
+        'static/mar_triste/3.png',
+        'static/mar_triste/4.png',
+        'static/mar_triste/5.png',
+        'static/mar_triste/6.png',
+        'static/mar_triste/7.png',
+        'static/mar_triste/8.png',
+        'static/mar_triste/9.png',
+        'static/mar_triste/10.png',
+        'static/mar_triste/11.png',
+        'static/mar_triste/12.png',
+        'static/mar_triste/13.png',
+        'static/mar_triste/14.png',
+        'static/mar_triste/15.png',
+        'static/mar_triste/16.png',
+        'static/mar_triste/17.png',
+        'static/mar_triste/18.png',
+        'static/mar_triste/19.png',
+        'static/mar_triste/20.png'
+    
+      ],
+      neutro: [
+        'static/mar_neutro/1.png',
+        'static/mar_neutro/2.png',
+        'static/mar_neutro/3.png',
+        'static/mar_neutro/4.png',
+        'static/mar_neutro/5.png',
+        'static/mar_neutro/6.png',
+        'static/mar_neutro/7.png',
+        'static/mar_neutro/8.png',
+        'static/mar_neutro/9.png',
+        'static/mar_neutro/10.png',
+        'static/mar_neutro/11.png',
+        'static/mar_neutro/12.png',
+        'static/mar_neutro/13.png',
+        'static/mar_neutro/14.png',
+        'static/mar_neutro/15.png',
+        'static/mar_neutro/16.png',
+        'static/mar_neutro/17.png',
+        'static/mar_neutro/18.png',
+        'static/mar_neutro/19.png',
+        'static/mar_neutro/20.png'
+      ]
+    };
+
+    const traducoes = {
+      happy: 'feliz',
+      sad: 'triste',
+      neutral: 'neutro',
+      angry: 'triste',
+      fearful: 'triste',
+      disgusted: 'triste',
+      surprised: 'feliz'
+    };
+
+    function getQueryParam(name){
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function imagemAleatoria(lista){
+      return lista[Math.floor(Math.random() * lista.length)];
+    }
+
+    const emocaoOriginal = getQueryParam('emocao') || 'neutral';
+    const conf = getQueryParam('conf') || '0';
+    const emocaoTraduzida = traducoes[emocaoOriginal] || 'nenhuma';
+
+    document.getElementById('emocaoTitle').innerText =
+      emocaoTraduzida.charAt(0).toUpperCase() + emocaoTraduzida.slice(1);
+    document.getElementById('confTitle').innerText = `Confiança: ${conf}%`;
+
+    if (imagensPorEmocao[emocaoTraduzida] && imagensPorEmocao[emocaoTraduzida].length > 0){
+      document.getElementById('imagemEmocao').src = imagemAleatoria(imagensPorEmocao[emocaoTraduzida]);
+    } else {
+      document.getElementById('imagemEmocao').style.display = 'none';
+    }
+
+    function voltar(){
+      window.location.href = 'index.html';
+    }
+
+    function toggleTheme(){
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "light" ? "dark" : "light");
+    }
+  </script>
+</body>
+</html>
